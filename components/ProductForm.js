@@ -41,7 +41,7 @@ export default function ProductForm({ product }) {
       <h2 className="text-2xl font-bold">{product.title}</h2>
       <span className="pb-6">{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
       {
-          product.options.map(({ name, values}) => (
+          product.options.map(({ name, values }) => (
               <ProductOptions 
               key={`key-${name}`}
               name={name}
