@@ -3,6 +3,7 @@ import { Fragment, useContext, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
+import Link from 'next/link'
 import { CartContext } from '../context/shopContext'
 import { formatter } from '../utils/helpers'
 
@@ -66,7 +67,9 @@ export default function MiniCart({ cart }) {
 
                     <div className="mt-8">
                       <div className="flow-root">
-                        <ul role="list" className="-my-6 divide-y divide-gray-200">
+                          {
+                              cart.length > 0 ?
+                              <ul role="list" className="-my-6 divide-y divide-gray-200">
                           {cart.map((product) => (
                             <li key={product.id + Math.random()} className="py-6 flex">
                               <div className="relative flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
@@ -82,7 +85,9 @@ export default function MiniCart({ cart }) {
                                 <div>
                                   <div className="flex justify-between text-base font-medium text-gray-900">
                                     <h3>
-                                      <a href={product.href}>{product.title}</a>
+                                    <Link href={`/products/${product.handle}`} passHref>
+                                      <a onClick={() => setCartOpen(false)}>{product.title}</a>
+                                    </Link>
                                     </h3>
                                     <p className="ml-4">{formatter.format(product.variantPrice)}</p>
                                   </div>
@@ -103,7 +108,12 @@ export default function MiniCart({ cart }) {
                               </div>
                             </li>
                           ))}
-                        </ul>
+                        </ul> : 
+                        <div>
+                            <p>Nothing in your Cart!</p>
+                        </div>
+                          }
+                        
                       </div>
                     </div>
                   </div>
