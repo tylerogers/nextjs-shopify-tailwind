@@ -3,7 +3,7 @@ import React from 'react'
 export default function ProductOptions({ name, values, selectedOptions, setOptions }) {
   return (
     <fieldset>
-        <legend className='text-xl font-semibold'>{name}</legend>
+        <legend className='text-xl font-semibold pt-4'>{name}</legend>
         <div className="inline-flex items-center flex-wrap">
         {
             values.map(value => {
