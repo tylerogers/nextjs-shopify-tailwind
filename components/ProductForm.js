@@ -33,6 +33,7 @@ export default function ProductForm({ product }) {
 
     const [selectedVariant, setSelectedVariant] = useState(allVariantOptions[0])
     const [selectedOptions, setSelectedOptions] = useState(defaultValues)
+    const [inputValue, setInputValue] = useState("");
 
     function setOptions(name, value) {
         setSelectedOptions(prevState => {
@@ -47,12 +48,37 @@ export default function ProductForm({ product }) {
         allVariantOptions.map(item => {
             if (JSON.stringify(item.options) === JSON.stringify(selection)) {
                 setSelectedVariant(item)
+                selectedVariant.variantQuantity = 1
+                setInputValue(selectedVariant.variantQuantity)
+                console.log(selectedVariant.variantQuantity)
             }
         })
     }
 
+    const increment = () => {
+        selectedVariant.variantQuantity += 1
+        setInputValue(selectedVariant.variantQuantity)
+        console.log(selectedVariant.variantQuantity)
+    }
+
+    const decrement = () => {
+        setInputValue(selectedVariant.variantQuantity)
+        if (selectedVariant.variantQuantity > 1) {
+            selectedVariant.variantQuantity -= 1
+            setInputValue(selectedVariant.variantQuantity)
+        }
+        console.log(selectedVariant.variantQuantity)
+    }
+
+    const handleChange = (e) => {
+        selectedVariant.variantQuantity = Number(e.target.value);
+        setInputValue(selectedVariant.variantQuantity)
+        console.log(selectedVariant.variantQuantity)
+    }
+
+
   return (
-    <div className="rounded-2xl p-4 shadow-lg flex flex-col w-full md:w-1/3">
+    <div className="rounded-2xl p-4 shadow-lg flex flex-col md:w-1/3 w-11/12">
       <h2 className="text-2xl font-bold">{product.title}</h2>
       <span className="pb-3 text-xl">{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
       {
@@ -66,6 +92,19 @@ export default function ProductForm({ product }) {
               />
           ))
       }
+       <div className="inline-block mt-6 mb-2 ml-1">
+        <button 
+        onClick={decrement}
+        className='border-2 border-r-0 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+          &mdash;
+        </button>
+        <input className="text-center border-2 w-16 py-1 font-semibold" type="text" placeholder="1" min={1} max={30} value={inputValue} onChange={handleChange} />
+        <button 
+        onClick={increment}
+        className='border-2 border-l-0 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+          &#xff0b;
+        </button>  
+      </div>   
       <button 
       onClick={() => {
           addToCart(selectedVariant)

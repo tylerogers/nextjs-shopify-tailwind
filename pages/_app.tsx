@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/styles.css'
 import type { AppProps } from 'next/app'
 import 'tailwindcss/tailwind.css'
 import 'swiper/swiper.scss'

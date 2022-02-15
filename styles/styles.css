@@ -1,0 +1,23 @@
+.swiper-button-prev,
+.swiper-button-next { 
+    opacity: .1 !important; 
+    position: relative;
+    z-index: 50;
+}
+
+.swiper-button-prev:before,
+.swiper-button-next:before {
+    position: absolute;
+    content: '';
+    top: -170px;
+    right: -150px;
+    left: -150px;
+    bottom: -170px;
+    z-index: 40;
+}
+
+/* .swiper-pagination,
+.swiper-pagination-clickable,
+.swiper-pagination-bullets {
+
+} */
