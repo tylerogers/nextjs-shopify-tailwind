@@ -27,6 +27,8 @@ export default function ProductPageContent({ product }) {
             <Swiper
               style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
               navigation
+              modules={[Navigation, Pagination]}
+              cssMode={true}
               pagination={{ clickable: true }}
               className="w-full md:rounded-2xl"
               loop="true"
