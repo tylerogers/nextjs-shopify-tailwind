@@ -2,9 +2,15 @@ import '../styles/globals.css'
 import '../styles/styles.css'
 import type { AppProps } from 'next/app'
 import 'tailwindcss/tailwind.css'
-import 'swiper/swiper.scss'
-import 'swiper/components/navigation/navigation.scss'
-import 'swiper/components/pagination/pagination.scss'
+// swiper bundle styles
+import 'swiper/css/bundle'
+
+// swiper core styles
+import 'swiper/css'
+
+// modules styles
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 import Layout from '../components/Layout'
 import ShopProvider from '../context/shopContext'
 import { useRouter } from 'next/router'
