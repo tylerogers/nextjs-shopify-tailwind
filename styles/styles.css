@@ -1,9 +1,16 @@
-.swiper-button-prev,
+/* .swiper-button-prev,
 .swiper-button-next { 
     opacity: .1 !important; 
     position: relative;
     z-index: 50;
 }
+
+@media (max-width: 499px) {
+.swiper-button-prev,
+.swiper-button-next { 
+    opacity: 0 !important; 
+}
+} */
 
 /* .swiper-button-prev:before,
 .swiper-button-next:before {
