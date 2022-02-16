@@ -98,7 +98,7 @@ export default function ProductForm({ product }) {
         className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
           &mdash;
         </button>
-        <input className="text-center border-y-2 w-16 py-1 font-semibold" type="text" placeholder="1" min={1} max={30} value={inputValue} onChange={handleChange} />
+        <input className="text-center border-y-2 border-x-0 rounded-none w-16 py-1 font-semibold" type="text" placeholder="1" min={1} max={30} value={inputValue} onChange={handleChange} />
         <button 
         onClick={increment}
         className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
