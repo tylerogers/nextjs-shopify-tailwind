@@ -50,7 +50,6 @@ export default function ProductForm({ product }) {
                 setSelectedVariant(item)
                 selectedVariant.variantQuantity = 1
                 setInputValue(selectedVariant.variantQuantity)
-                console.log(selectedVariant.variantQuantity)
             }
         })
     }
@@ -58,7 +57,6 @@ export default function ProductForm({ product }) {
     const increment = () => {
         selectedVariant.variantQuantity += 1
         setInputValue(selectedVariant.variantQuantity)
-        console.log(selectedVariant.variantQuantity)
     }
 
     const decrement = () => {
@@ -67,13 +65,11 @@ export default function ProductForm({ product }) {
             selectedVariant.variantQuantity -= 1
             setInputValue(selectedVariant.variantQuantity)
         }
-        console.log(selectedVariant.variantQuantity)
     }
 
     const handleChange = (e) => {
         selectedVariant.variantQuantity = Number(e.target.value);
         setInputValue(selectedVariant.variantQuantity)
-        console.log(selectedVariant.variantQuantity)
     }
 
 

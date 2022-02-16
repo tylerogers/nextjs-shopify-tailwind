@@ -10,7 +10,7 @@
 }
 }  
 
-@media (min-width: 500px) {
+@media (min-width: 1025px) {
 .swiper-button-prev:before,
 .swiper-button-next:before {
     position: absolute;
