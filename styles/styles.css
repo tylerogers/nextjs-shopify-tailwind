@@ -28,6 +28,6 @@
     height: var(--swiper-pagination-bullet-height,var(--swiper-pagination-bullet-size,10px)) !important;
 } 
 
-.highlight-parent {
+.highlight-removal {
     -webkit-tap-highlight-color: transparent !important;
 }

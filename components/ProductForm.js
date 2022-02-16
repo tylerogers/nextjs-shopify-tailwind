@@ -92,7 +92,8 @@ export default function ProductForm({ product }) {
               />
           ))
       }
-       <div className="inline-block mt-6 mb-2 ml-1">
+      <legend className='text-xl font-semibold mt-6'>Qty</legend>
+       <div className="inline-block mb-2 mt-2">
         <button 
         onClick={decrement}
         className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
