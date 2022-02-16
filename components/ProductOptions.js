@@ -4,7 +4,7 @@ export default function ProductOptions({ name, values, selectedOptions, setOptio
   return (
     <fieldset>
         <legend className='text-xl font-semibold pt-4'>{name}</legend>
-        <div className="inline-flex items-center flex-wrap">
+        <div className="inline-flex items-center flex-wrap active:bg-transparent">
         {
             values.map(value => {
                 const id = `option-${name}-${value}`
