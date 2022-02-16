@@ -78,7 +78,7 @@ export default function ProductForm({ product }) {
 
 
   return (
-    <div className="rounded-2xl p-4 shadow-lg flex flex-col w-11/12 md:w-[35%] lg:w-1/3">
+    <div className="rounded-2xl p-4 relative -top-4 md:top-0 shadow-lg flex flex-col w-11/12 md:w-[35%] lg:w-1/3">
       <h2 className="text-2xl font-bold">{product.title}</h2>
       <span className="pb-3 text-xl">{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
       {
@@ -95,13 +95,13 @@ export default function ProductForm({ product }) {
        <div className="inline-block mt-6 mb-2 ml-1">
         <button 
         onClick={decrement}
-        className='border-2 border-r-0 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+        className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
           &mdash;
         </button>
-        <input className="text-center border-2 w-16 py-1 font-semibold" type="text" placeholder="1" min={1} max={30} value={inputValue} onChange={handleChange} />
+        <input className="text-center border-y-2 w-16 py-1 font-semibold" type="text" placeholder="1" min={1} max={30} value={inputValue} onChange={handleChange} />
         <button 
         onClick={increment}
-        className='border-2 border-l-0 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+        className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
           &#xff0b;
         </button>  
       </div>   
