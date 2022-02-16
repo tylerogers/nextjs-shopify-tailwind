@@ -28,7 +28,6 @@
     height: var(--swiper-pagination-bullet-height,var(--swiper-pagination-bullet-size,10px)) !important;
 } 
 
-.david,
-.yaima {
+.highlight-parent {
     -webkit-tap-highlight-color: transparent !important;
 }
