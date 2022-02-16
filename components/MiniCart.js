@@ -1,11 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useContext, useRef } from 'react'
+import { Fragment, useContext, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CartContext } from '../context/shopContext'
 import { formatter } from '../utils/helpers'
+
 
 export default function MiniCart({ cart }) {
   const cancelButtonRef = useRef()
@@ -14,8 +15,31 @@ export default function MiniCart({ cart }) {
 
   let cartTotal = 0
   cart.map(item => {
-      cartTotal += item ?.variantPrice * item?.variantQuantity
+      cartTotal += item?.variantPrice * item?.variantQuantity
   })
+
+  const [inputValue, setInputValue] = useState("");
+
+  const increment = (p) => {
+    let item = cart.find(el => el.name === p.name)
+    item.variantQuantity += 1
+    setInputValue(item.variantQuantity)
+  }
+
+  const decrement = (p) => {
+    let item = cart.find(el => el.name === p.name)
+    setInputValue(item.variantQuantity)
+    if (item.variantQuantity > 1) {
+      item.variantQuantity -= 1
+      setInputValue(item.variantQuantity)
+    }
+  }
+
+  const handleChange = (e) => {
+    let item = cart.find(el => el.name === p.name)
+    item.variantQuantity = Number(e.target.value);
+    setInputValue(item.variantQuantity)
+  }
 
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
@@ -94,8 +118,19 @@ export default function MiniCart({ cart }) {
                                   <p className="mt-1 text-sm text-gray-500">{product.variantTitle}</p>
                                 </div>
                                 <div className="flex-1 flex items-end justify-between text-sm">
-                                  <p className="text-gray-500">Qty {product.variantQuantity}</p>
-
+                                    <div className="inline-block mt-2">
+                                      <button 
+                                      onClick={decrement}
+                                      className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+                                        &mdash;
+                                      </button>
+                                          <input className="text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" min={1} max={30} value={product.variantQuantity} onChange={handleChange} />
+                                      <button 
+                                      onClick={increment}
+                                      className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+                                        &#xff0b;
+                                      </button>  
+                                </div>   
                                   <div className="flex">
                                     <button 
                                     onClick={() => removeCartItem(product.id)}
