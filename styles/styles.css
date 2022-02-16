@@ -27,3 +27,8 @@
     width: var(--swiper-pagination-bullet-width,var(--swiper-pagination-bullet-size,10px)) !important;
     height: var(--swiper-pagination-bullet-height,var(--swiper-pagination-bullet-size,10px)) !important;
 } 
+
+.david,
+.yaima {
+    -webkit-tap-highlight-color: transparent !important;
+}
