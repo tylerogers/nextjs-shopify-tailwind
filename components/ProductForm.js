@@ -111,6 +111,7 @@ export default function ProductForm({ product }) {
       <button 
       onClick={() => {
           addToCart(selectedVariant)
+          resetInputValue()
       }}
       className="font-semibold bg-black rounded-lg text-white px-2 py-3 mt-8 hover:bg-gray-800">Add to Cart</button>
     </div>
