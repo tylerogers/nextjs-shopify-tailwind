@@ -21,15 +21,12 @@ export default function MiniCart({ cart }) {
   const [inputValue, setInputValue] = useState(1);
 
   const increment = (product_id) => {
-    console.log(product_id)
     let item = cart.find(el => el.id === product_id)
-    console.log(item)
     item.variantQuantity += 1
     setInputValue(item.variantQuantity)
   }
 
   const decrement = (product_id) => {
-    console.log(product_id)
     let item = cart.find(el => el.id === product_id)
     setInputValue(item.variantQuantity)
     if (item.variantQuantity > 1) {
@@ -38,10 +35,9 @@ export default function MiniCart({ cart }) {
     }
   }
 
-  const handleChange = (e) => {
-    let item = cart.find(el => el.id === e.id)
-    console.log(item)
-    item.variantQuantity = Number(e.target.value);
+  const handleChange = (id, e) => {
+    let item = cart.find(el => el.id === id)
+    item.variantQuantity = Number(e)
     setInputValue(item.variantQuantity)
   }
 
@@ -128,7 +124,7 @@ export default function MiniCart({ cart }) {
                                       className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
                                         &mdash;
                                       </button>
-                                          <input className="text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" value={product.variantQuantity} onChange={handleChange} />
+                                          <input className="text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" value={product.variantQuantity} onChange={(e) => handleChange(product.id, e.target.value)} />
                                       <button 
                                       onClick={() => increment(product.id)}
                                       className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
