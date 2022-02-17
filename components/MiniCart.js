@@ -18,16 +18,19 @@ export default function MiniCart({ cart }) {
       cartTotal += item?.variantPrice * item?.variantQuantity
   })
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(1);
 
-  const increment = (p) => {
-    let item = cart.find(el => el.name === p.name)
+  const increment = (product_id) => {
+    console.log(product_id)
+    let item = cart.find(el => el.id === product_id)
+    console.log(item)
     item.variantQuantity += 1
     setInputValue(item.variantQuantity)
   }
 
-  const decrement = (p) => {
-    let item = cart.find(el => el.name === p.name)
+  const decrement = (product_id) => {
+    console.log(product_id)
+    let item = cart.find(el => el.id === product_id)
     setInputValue(item.variantQuantity)
     if (item.variantQuantity > 1) {
       item.variantQuantity -= 1
@@ -36,7 +39,8 @@ export default function MiniCart({ cart }) {
   }
 
   const handleChange = (e) => {
-    let item = cart.find(el => el.name === p.name)
+    let item = cart.find(el => el.id === e.id)
+    console.log(item)
     item.variantQuantity = Number(e.target.value);
     setInputValue(item.variantQuantity)
   }
@@ -120,13 +124,13 @@ export default function MiniCart({ cart }) {
                                 <div className="flex-1 flex items-end justify-between text-sm">
                                     <div className="inline-block mt-2">
                                       <button 
-                                      onClick={decrement}
+                                      onClick={() => decrement(product.id)}
                                       className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
                                         &mdash;
                                       </button>
-                                          <input className="text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" min={1} max={30} value={product.variantQuantity} onChange={handleChange} />
+                                          <input className="text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" value={product.variantQuantity} onChange={handleChange} />
                                       <button 
-                                      onClick={increment}
+                                      onClick={() => increment(product.id)}
                                       className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
                                         &#xff0b;
                                       </button>  
