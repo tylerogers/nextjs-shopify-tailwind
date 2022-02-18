@@ -33,7 +33,7 @@ export default function ProductForm({ product }) {
 
     const [selectedVariant, setSelectedVariant] = useState(allVariantOptions[0])
     const [selectedOptions, setSelectedOptions] = useState(defaultValues)
-    const [inputValue, setInputValue] = useState(1);
+    const [inputValue, setInputValue] = useState(1)
 
     function setOptions(name, value) {
         setSelectedOptions(prevState => {
@@ -101,7 +101,7 @@ export default function ProductForm({ product }) {
         className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
           &mdash;
         </button>
-        <input id="input" className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-16 py-1 font-semibold" type="text"  value={inputValue} onChange={handleChange} />
+        <input id="input" inputProps={{ inputMode: 'numeric' }} onFocus={(e) => e.target.value = ""} onBlur={(e) => e.target.value = inputValue} className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-16 py-1 font-semibold" type="text"  value={inputValue} onChange={handleChange} />
         <button 
         onClick={increment}
         className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
