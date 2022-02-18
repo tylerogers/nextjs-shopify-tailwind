@@ -31,3 +31,7 @@
 .highlight-removal {
     -webkit-tap-highlight-color: transparent !important;
 }
+
+.swiper-slide {
+    -webkit-transform: translate3d(0, 0, 0);
+}

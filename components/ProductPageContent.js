@@ -19,20 +19,22 @@ export default function ProductPageContent({ product }) {
 
   SwiperCore.use([Navigation, Pagination])
 
+
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center md:px-6 space-y-8 md:flex-row md:items-start md:space-y-0 md:space-x-4 lg:space-x-8 md:max-w-6xl mx-auto">
         <div className="w-full md:max-w-md border bg-white md:rounded-2xl shadow-lg">
           <div className="w-full">
             <Swiper
-              style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
-              navigation
-              pagination={{ clickable: true }}
-              className="w-full md:rounded-2xl"
-              loop="true"
-            >
-              {images}
-            </Swiper>
+            style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
+            navigation
+            pagination={{ clickable: true }}
+            className="w-full md:rounded-2xl"
+            loop="true"
+          >
+            {images}
+          </Swiper>
           </div>
         </div>
         <ProductForm product={product} />
