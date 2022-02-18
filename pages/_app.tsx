@@ -21,10 +21,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   return (
     <ShopProvider>
-      <Layout>
       <Head>
         <meta content="user-scalable=no" />
       </Head>
+      <Layout>
         <Component {...pageProps} key={router.asPath} />
       </Layout>
     </ShopProvider>
