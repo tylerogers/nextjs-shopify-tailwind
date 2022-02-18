@@ -26,9 +26,6 @@ export default function ProductPageContent({ product }) {
         <div className="w-full md:max-w-md border bg-white md:rounded-2xl shadow-lg">
           <div className="w-full">
             <Swiper
-              style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
-              navigation
-              pagination={{ clickable: true }}
             >
               {images}
             </Swiper>
