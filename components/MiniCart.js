@@ -41,6 +41,12 @@ export default function MiniCart({ cart }) {
     setInputValue(item.variantQuantity)
   }
 
+  const updateState = (id) => {
+    let item = cart.find(el => el.id === id)
+    item.variantQuantity = 1
+    setInputValue(item.variantQuantity)
+  }
+
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
       <Dialog 
@@ -124,7 +130,7 @@ export default function MiniCart({ cart }) {
                                       className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
                                         &mdash;
                                       </button>
-                                          <input inputMode='numeric' pattern="[0-9]*" onFocus={(e) => e.target.value = ""} onBlur={(e) => e.target.value = inputValue} className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" value={product.variantQuantity} onChange={(e) => handleChange(product.id, e.target.value)} />
+                                          <input inputMode='numeric' pattern="[0-9]*" onFocus={(e) => e.target.value = ""} onBlur={(e) => e.target.value = product.variantQuantity} className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" value={product.variantQuantity} onChange={(e) => handleChange(product.id, e.target.value)} />
                                       <button 
                                       onClick={() => increment(product.id)}
                                       className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
@@ -133,7 +139,10 @@ export default function MiniCart({ cart }) {
                                 </div>   
                                   <div className="flex">
                                     <button 
-                                    onClick={() => removeCartItem(product.id)}
+                                    onClick={() => {
+                                      removeCartItem(product.id);
+                                      updateState(product.id);
+                                    }}
                                     type="button" 
                                     className="font-medium text-gray-500 hover:text-gray-800">
                                       Remove
