@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import RecommendedList from './RecommendedList'
 
+var isChrome = !!window.chrome && !!window.chrome.webstore;
 
 export default function ProductPageContent({ product }) {
 
@@ -26,6 +27,7 @@ export default function ProductPageContent({ product }) {
           <div className="w-full">
             <Swiper
               style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
+              cssMode={true}
               navigation
               pagination={{ clickable: true }}
               className="w-full md:rounded-2xl"
