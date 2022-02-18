@@ -33,5 +33,6 @@
 }
 
 .swiper-slide {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
 }
