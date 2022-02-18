@@ -3,6 +3,7 @@ import { formatter } from "../utils/helpers"
 import ProductOptions from "./ProductOptions"
 import { CartContext } from '../context/shopContext'
 
+
 export default function ProductForm({ product }) {
 
     const { addToCart } = useContext(CartContext)
@@ -70,6 +71,9 @@ export default function ProductForm({ product }) {
     const handleChange = (e) => {
         selectedVariant.variantQuantity = Number(e.target.value);
         setInputValue(selectedVariant.variantQuantity)
+        if(e.key == 'Enter'){
+            e.target.blur();
+        }
     }
 
     const resetInputValue = () => {
@@ -101,7 +105,9 @@ export default function ProductForm({ product }) {
         className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
           &mdash;
         </button>
+        
         <input id="input" inputMode='numeric' pattern="[0-9]*" onFocus={(e) => e.target.value = ""} onBlur={(e) => e.target.value = inputValue} className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-16 py-1 font-semibold" type="text"  value={inputValue} onChange={handleChange} />
+        
         <button 
         onClick={increment}
         className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>

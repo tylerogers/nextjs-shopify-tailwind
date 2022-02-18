@@ -32,9 +32,6 @@ export default function ProductPageContent({ product }) {
             pagination={{ clickable: true }}
             className="w-full md:rounded-2xl"
             loop="true"
-            preloadImages='false'
-            lazy='true'
-            loadPrevNext='true'
           >
             {images}
           </Swiper>
