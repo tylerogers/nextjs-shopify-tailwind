@@ -14,6 +14,7 @@ import 'swiper/css/pagination'
 import Layout from '../components/Layout'
 import ShopProvider from '../context/shopContext'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -21,6 +22,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ShopProvider>
       <Layout>
+      <Head>
+        <meta content="user-scalable=no" />
+      </Head>
         <Component {...pageProps} key={router.asPath} />
       </Layout>
     </ShopProvider>
