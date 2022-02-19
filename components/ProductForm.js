@@ -71,7 +71,7 @@ export default function ProductForm({ product }) {
     const handleChange = (e) => {
         selectedVariant.variantQuantity = Number(e.target.value);
         setInputValue(selectedVariant.variantQuantity)
-        if(e.key == '[0-9]*'){
+        if(e.key === 0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 ){
             e.target.blur();
         }
     }
