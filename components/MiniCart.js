@@ -53,8 +53,8 @@ export default function MiniCart({ cart }) {
 
   const handlers = useSwipeable({
     onSwipedRight: () => setCartOpen(false),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true
+    // preventDefaultTouchmoveEvent: true,
+    // trackMouse: true
   });
 
   return (
