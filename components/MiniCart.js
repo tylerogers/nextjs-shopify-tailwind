@@ -54,7 +54,7 @@ export default function MiniCart({ cart }) {
   const handlers = useSwipeable({
     onSwipedRight: () => setCartOpen(false),
     preventDefaultTouchmoveEvent: true,
-    // trackMouse: true
+    trackMouse: true
   });
 
   return (
@@ -87,7 +87,7 @@ export default function MiniCart({ cart }) {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div {...handlers} className="w-screen max-w-full sm:max-w-md">
+              <div {...handlers} style={{ touchAction: 'pan-right' }} className="w-screen max-w-full sm:max-w-md">
                 <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                   <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                     <div className="flex items-start justify-between">
