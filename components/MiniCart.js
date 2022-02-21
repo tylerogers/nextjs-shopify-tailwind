@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { CartContext } from '../context/shopContext'
 import { formatter } from '../utils/helpers'
+import { useSwipeable } from 'react-swipeable';
 
 
 export default function MiniCart({ cart }) {
@@ -50,6 +51,12 @@ export default function MiniCart({ cart }) {
     setInputValue(item.variantQuantity)
   }
 
+  const handlers = useSwipeable({
+    onSwipedRight: () => setCartOpen(false),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true
+  });
+
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
       <Dialog 
@@ -80,7 +87,7 @@ export default function MiniCart({ cart }) {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div className="w-screen max-w-full sm:max-w-md">
+              <div {...handlers} className="w-screen max-w-full sm:max-w-md">
                 <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                   <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                     <div className="flex items-start justify-between">
