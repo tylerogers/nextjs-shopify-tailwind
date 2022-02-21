@@ -121,6 +121,7 @@ export default function ProductForm({ product }) {
             selectedVariant.newVariantQuantity = counter
             setCounter(1)
         }
+        console.log('in cart:', selectedVariant.variantQuantity, 'counter:', counter, 'new item:', selectedVariant.newVariantQuantity)
     }
 
 
@@ -144,7 +145,7 @@ export default function ProductForm({ product }) {
        <div className="inline-block mb-2 mt-2">
         <button 
         onClick={decrement}
-        className='highlight-removal transition-all ease-in-out duration-400 border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+        className='highlight-removal transition-all ease-in-out duration-400 border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-black active:text-white'>
           &mdash;
         </button>
         
@@ -152,7 +153,7 @@ export default function ProductForm({ product }) {
         
         <button 
         onClick={increment}
-        className='highlight-removal transition-all ease-in-out duration-400 border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+        className='highlight-removal transition-all ease-in-out duration-400 border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-black active:text-white'>
           &#xff0b;
         </button>  
       </div>   
@@ -161,7 +162,7 @@ export default function ProductForm({ product }) {
           addToCart(selectedVariant)
           setCounter(1)
       }}
-      className="font-semibold bg-black rounded-lg text-white px-2 py-3 mt-8 hover:bg-gray-800">Add to Cart</button>
+      className="transition-all ease-in-out duration-400 font-bold bg-amber-300 rounded-lg text-black px-2 py-3 mt-8 hover:bg-amber-400">Add to Cart</button>
     </div>
   )
 }
