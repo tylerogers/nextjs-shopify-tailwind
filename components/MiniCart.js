@@ -58,7 +58,7 @@ export default function MiniCart({ cart }) {
   });
 
   return (
-    <Transition.Root show={cartOpen} as={Fragment}>
+    <Transition.Root show={cartOpen} as={Fragment} {...handlers} style={{ touchAction: 'pan-right' }}>
       <Dialog 
       initialFocus={cancelButtonRef}
       as="div" 
@@ -87,7 +87,7 @@ export default function MiniCart({ cart }) {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div {...handlers} style={{ touchAction: 'pan-right' }} className="w-screen max-w-full sm:max-w-md">
+              <div className="w-screen max-w-full sm:max-w-md">
                 <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                   <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                     <div className="flex items-start justify-between">
