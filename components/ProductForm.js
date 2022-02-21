@@ -39,7 +39,6 @@ export default function ProductForm({ product }) {
     
 
     function setOptions(name, value) {
-        let input = document.querySelector('#input').value
         setSelectedOptions(prevState => {
             return { ...prevState, [name]: value }
         })
@@ -105,8 +104,16 @@ export default function ProductForm({ product }) {
             selectedVariant.variantQuantity = counter
             setCounter(selectedVariant.variantQuantity)
         }
-        if(e.key === 0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 ){
+        if(e.key === 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 ){
             e.target.blur();
+        } 
+        if(isNaN(counter)) {
+            e.target.value = 1
+            parseInt(e.target.value)
+            counter = 1
+            selectedVariant.variantQuantity = counter
+            selectedVariant.newVariantQuantity = counter
+            setCounter(1)
         }
     }
 
