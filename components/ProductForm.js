@@ -144,7 +144,7 @@ export default function ProductForm({ product }) {
        <div className="inline-block mb-2 mt-2">
         <button 
         onClick={decrement}
-        className='transition-all ease-in-out duration-400 border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+        className='highlight-removal transition-all ease-in-out duration-400 border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
           &mdash;
         </button>
         
@@ -152,7 +152,7 @@ export default function ProductForm({ product }) {
         
         <button 
         onClick={increment}
-        className='transition-all ease-in-out duration-400 border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
+        className='highlight-removal transition-all ease-in-out duration-400 border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
           &#xff0b;
         </button>  
       </div>   
