@@ -6,7 +6,7 @@ import { CartContext } from '../context/shopContext'
 
 export default function ProductForm({ product }) {
 
-    const { addToCart } = useContext(CartContext)
+    const { cart, addToCart } = useContext(CartContext)
 
     const allVariantOptions = product.variants.edges?.map(variant => {
         const allOptions = {}
@@ -23,7 +23,8 @@ export default function ProductForm({ product }) {
             options: allOptions,
             variantTitle: variant.node.title,
             variantPrice: variant.node.priceV2.amount,
-            variantQuantity: 1
+            variantQuantity: 1,
+            newVariantQuantity: 1
         }
     })
 
@@ -35,8 +36,11 @@ export default function ProductForm({ product }) {
     const [selectedVariant, setSelectedVariant] = useState(allVariantOptions[0])
     const [selectedOptions, setSelectedOptions] = useState(defaultValues)
     const [inputValue, setInputValue] = useState(1)
+    const [counter, setCounter] = useState(1);
+    
 
     function setOptions(name, value) {
+        let input = document.querySelector('#input').value
         setSelectedOptions(prevState => {
             return { ...prevState, [name]: value }
         })
@@ -49,23 +53,90 @@ export default function ProductForm({ product }) {
         allVariantOptions.map(item => {
             if (JSON.stringify(item.options) === JSON.stringify(selection)) {
                 setSelectedVariant(item)
-                setInputValue(selectedVariant.variantQuantity)
-                resetInputValue()
+                setCounter(1)
+                console.log('clicked variant: after', item.variantQuantity, item.newVariantQuantity, selectedVariant.newVariantQuantity, selectedVariant.variantQuantity)
             }
         })
     }
 
     const increment = () => {
-        selectedVariant.variantQuantity += 1
-        setInputValue(selectedVariant.variantQuantity)
+        // let input = document.querySelector('#input').value
+        
+
+        // if (input == 1 && (selectedVariant.variantQuantity !== 1)) {
+        //     input = 1
+        //     selectedVariant.newVariantQuantity = 1
+        //     console.log(selectedVariant.newVariantQuantity)
+        // } 
+
+        // cart.map(item => {
+        //     if (item.id === selectedVariant.id) {
+        //         console.log('same for increment')
+        //         selectedVariant.newVariantQuantity += 1
+        //         setInputValue(selectedVariant.newVariantQuantity)
+        //     }
+        // })
+        
+        //     console.log('empty cart')
+        //     selectedVariant.variantQuantity += 1
+        //     setInputValue(selectedVariant.variantQuantity)
+
+        
+        counter += 1
+        setCounter(counter)
+
+        cart.map(item => {
+            if (item.id === selectedVariant.id) {
+                console.log(item.variantQuantity, selectedVariant.variantQuantity, counter, item.newVariantQuantity, selectedVariant.newVariantQuantity)
+                selectedVariant.newVariantQuantity += 1
+                setCounter(selectedVariant.newVariantQuantity)
+            } else {
+                selectedVariant.variantQuantity = counter
+            }
+        })
+        if (cart.length === 0) {
+            selectedVariant.variantQuantity = counter
+        }
+        console.log(counter, selectedVariant.variantQuantity)
     }
 
     const decrement = () => {
-        setInputValue(selectedVariant.variantQuantity)
-        if (selectedVariant.variantQuantity > 1) {
-            selectedVariant.variantQuantity -= 1
-            setInputValue(selectedVariant.variantQuantity)
+        // let input = document.querySelector('#input').value
+
+        // if (input == 1 && (selectedVariant.variantQuantity !== 1)) {
+        //     input = 1
+        //     selectedVariant.newVariantQuantity = 1
+        // } 
+
+        // cart.map(item => {
+        //     if ((item.id === selectedVariant.id) && (selectedVariant.newVariantQuantity > 1)) {
+        //         selectedVariant.newVariantQuantity -= 1
+        //         setInputValue(selectedVariant.newVariantQuantity)
+        //     } else {
+        //         selectedVariant.variantQuantity -= 1
+        //         setInputValue(selectedVariant.variantQuantity)
+        //     }
+        // })
+
+        // if ((cart.length === 0) && (selectedVariant.variantQuantity > 1)) {
+        //     selectedVariant.variantQuantity -= 1
+        //     setInputValue(selectedVariant.variantQuantity)
+        // }
+        counter > 1 ? counter -= 1 : setCounter(1)
+        setCounter(counter)
+        cart.map(item => {
+            if (item.id === selectedVariant.id) {
+                console.log(item.variantQuantity, selectedVariant.variantQuantity, counter, item.newVariantQuantity, selectedVariant.newVariantQuantity)
+                selectedVariant.newVariantQuantity -= 1
+                setCounter(selectedVariant.newVariantQuantity)
+            } else {
+                selectedVariant.variantQuantity = counter
+            }
+        })
+        if (cart.length === 0) {
+            selectedVariant.variantQuantity = counter
         }
+        console.log(counter, selectedVariant.variantQuantity)
     }
 
     const handleChange = (e) => {
@@ -80,7 +151,7 @@ export default function ProductForm({ product }) {
         const input = document.querySelector('#input').value
         input = 1
         setInputValue(input)
-      }
+    }
 
 
   return (
@@ -95,6 +166,7 @@ export default function ProductForm({ product }) {
               values={values}
               selectedOptions={selectedOptions}
               setOptions={setOptions}
+              selectedVariant={selectedVariant}
               />
           ))
       }
@@ -106,7 +178,7 @@ export default function ProductForm({ product }) {
           &mdash;
         </button>
         
-        <input id="input" inputMode='numeric' pattern="[0-9]*" onFocus={(e) => e.target.value = ""} onBlur={(e) => e.target.value = inputValue} className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-16 py-1 font-semibold" type="text"  value={inputValue} onChange={handleChange} />
+        <input id="input" inputMode='numeric' pattern="[0-9]*" onFocus={(e) => e.target.value = ""} onBlur={(e) => e.target.value = counter} className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-16 py-1 font-semibold" type="text"  value={counter} onChange={handleChange} />
         
         <button 
         onClick={increment}
@@ -117,7 +189,8 @@ export default function ProductForm({ product }) {
       <button 
       onClick={() => {
           addToCart(selectedVariant)
-          resetInputValue()
+          setCounter(1)
+          console.log(counter, selectedVariant.variantQuantity)
       }}
       className="font-semibold bg-black rounded-lg text-white px-2 py-3 mt-8 hover:bg-gray-800">Add to Cart</button>
     </div>

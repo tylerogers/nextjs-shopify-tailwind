@@ -40,15 +40,15 @@ export default function shopProvider({ children }) {
         } else {
             let newCart = []
             let added = false
-
+            
             cart.map(item => {
                 if (item.id === newItem.id) {
-                    item.variantQuantity++
+                    console.log('same', item.variantQuantity, newItem.variantQuantity, item.newVariantQuantity, newItem.newVariantQuantity )
+                    item.variantQuantity += newItem.newVariantQuantity
                     newCart = [...cart]
                     added = true
-                } else {
-                    newCart = [...cart, newItem]
-                }
+                    newItem.newVariantQuantity = 1
+                } 
             })
 
             if (!added) {
@@ -75,6 +75,27 @@ export default function shopProvider({ children }) {
         }
     }
 
+    async function updateMiniCartQuantity(newItem) {
+            let newCart = []
+            let added = false
+            
+            cart.map(item => {
+                if (item.id === newItem.id) {
+                    console.log('same item')
+                    newCart = [...cart]
+                    added = true
+                }
+            })
+
+            if (!added) {
+                newCart = [...cart, newItem]
+            }
+
+            setCart(newCart)
+            const newCheckout = await updateCheckout(checkoutId, newCart)
+            localStorage.setItem("checkout_id", JSON.stringify([newCart, newCheckout]))
+    }
+
 
   return (
     <CartContext.Provider value={{
@@ -83,7 +104,8 @@ export default function shopProvider({ children }) {
         setCartOpen,
         addToCart,
         checkoutUrl,
-        removeCartItem
+        removeCartItem,
+        updateMiniCartQuantity
     }}>
         {children}
     </CartContext.Provider>

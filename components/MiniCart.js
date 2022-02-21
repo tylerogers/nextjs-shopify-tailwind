@@ -11,7 +11,7 @@ import { formatter } from '../utils/helpers'
 export default function MiniCart({ cart }) {
   const cancelButtonRef = useRef()
 
-  const { cartOpen, setCartOpen, checkoutUrl, removeCartItem } = useContext(CartContext)
+  const { cartOpen, setCartOpen, checkoutUrl, removeCartItem, updateMiniCartQuantity } = useContext(CartContext)
 
   let cartTotal = 0
   cart.map(item => {
@@ -24,6 +24,7 @@ export default function MiniCart({ cart }) {
     let item = cart.find(el => el.id === product_id)
     item.variantQuantity += 1
     setInputValue(item.variantQuantity)
+    updateMiniCartQuantity(item)
   }
 
   const decrement = (product_id) => {
@@ -32,13 +33,15 @@ export default function MiniCart({ cart }) {
     if (item.variantQuantity > 1) {
       item.variantQuantity -= 1
       setInputValue(item.variantQuantity)
+      updateMiniCartQuantity(item)
     }
   }
 
   const handleChange = (id, e) => {
     let item = cart.find(el => el.id === id)
-    item.variantQuantity = Number(e)
+    item.variantQuantity = Number.parseFloat(e)
     setInputValue(item.variantQuantity)
+    updateMiniCartQuantity(item)
   }
 
   const updateState = (id) => {
@@ -130,7 +133,7 @@ export default function MiniCart({ cart }) {
                                       className='border-2 px-3 rounded-l-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
                                         &mdash;
                                       </button>
-                                          <input inputMode='numeric' pattern="[0-9]*" onFocus={(e) => e.target.value = ""} onBlur={(e) => e.target.value = product.variantQuantity} className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" value={product.variantQuantity} onChange={(e) => handleChange(product.id, e.target.value)} />
+                                          <input id="input" inputMode='numeric' pattern="[0-9]*" onFocus={(e) => e.target.value = ""} onBlur={(e) => e.target.value = product.variantQuantity} className="relative z-50 focus:outline-2 outline-indigo-400 caret-indigo-400 text-center border-y-2 border-x-0 rounded-none w-12 py-1 font-semibold" type="text" value={product.variantQuantity} onChange={(e) => handleChange(product.id, e.target.value)} />
                                       <button 
                                       onClick={() => increment(product.id)}
                                       className='border-2 px-3 rounded-r-md py-1 font-semibold hover:bg-gray-200 active:bg-gray-500 active:text-white'>
