@@ -66,31 +66,37 @@ export default function ProductForm({ product }) {
                 setCounter(selectedVariant.newVariantQuantity)
             } else {
                 selectedVariant.variantQuantity = counter
+                setCounter(selectedVariant.variantQuantity)
             }
         })
         if (cart.length === 0) {
             selectedVariant.variantQuantity = counter
+            setCounter(selectedVariant.variantQuantity)
         }
     }
 
     const decrement = () => {
         counter > 1 ? counter -= 1 : setCounter(1)
         setCounter(counter)
+
         cart.map(item => {
             if (item.id === selectedVariant.id) {
                 selectedVariant.newVariantQuantity -= 1
                 setCounter(selectedVariant.newVariantQuantity)
             } else {
                 selectedVariant.variantQuantity = counter
+                setCounter(selectedVariant.variantQuantity)
             }
         })
         if (cart.length === 0) {
             selectedVariant.variantQuantity = counter
+            setCounter(selectedVariant.variantQuantity)
         }
     }
 
     const handleChange = (e) => {
         counter = Number(e.target.value);
+        
         cart.map(item => {
             if (item.id === selectedVariant.id) {
                 selectedVariant.newVariantQuantity = counter
