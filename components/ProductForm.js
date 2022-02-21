@@ -35,7 +35,6 @@ export default function ProductForm({ product }) {
 
     const [selectedVariant, setSelectedVariant] = useState(allVariantOptions[0])
     const [selectedOptions, setSelectedOptions] = useState(defaultValues)
-    const [inputValue, setInputValue] = useState(1)
     const [counter, setCounter] = useState(1);
     
 
@@ -54,40 +53,16 @@ export default function ProductForm({ product }) {
             if (JSON.stringify(item.options) === JSON.stringify(selection)) {
                 setSelectedVariant(item)
                 setCounter(1)
-                console.log('clicked variant: after', item.variantQuantity, item.newVariantQuantity, selectedVariant.newVariantQuantity, selectedVariant.variantQuantity)
             }
         })
     }
 
     const increment = () => {
-        // let input = document.querySelector('#input').value
-        
-
-        // if (input == 1 && (selectedVariant.variantQuantity !== 1)) {
-        //     input = 1
-        //     selectedVariant.newVariantQuantity = 1
-        //     console.log(selectedVariant.newVariantQuantity)
-        // } 
-
-        // cart.map(item => {
-        //     if (item.id === selectedVariant.id) {
-        //         console.log('same for increment')
-        //         selectedVariant.newVariantQuantity += 1
-        //         setInputValue(selectedVariant.newVariantQuantity)
-        //     }
-        // })
-        
-        //     console.log('empty cart')
-        //     selectedVariant.variantQuantity += 1
-        //     setInputValue(selectedVariant.variantQuantity)
-
-        
         counter += 1
         setCounter(counter)
 
         cart.map(item => {
             if (item.id === selectedVariant.id) {
-                console.log(item.variantQuantity, selectedVariant.variantQuantity, counter, item.newVariantQuantity, selectedVariant.newVariantQuantity)
                 selectedVariant.newVariantQuantity += 1
                 setCounter(selectedVariant.newVariantQuantity)
             } else {
@@ -97,36 +72,13 @@ export default function ProductForm({ product }) {
         if (cart.length === 0) {
             selectedVariant.variantQuantity = counter
         }
-        console.log(counter, selectedVariant.variantQuantity)
     }
 
     const decrement = () => {
-        // let input = document.querySelector('#input').value
-
-        // if (input == 1 && (selectedVariant.variantQuantity !== 1)) {
-        //     input = 1
-        //     selectedVariant.newVariantQuantity = 1
-        // } 
-
-        // cart.map(item => {
-        //     if ((item.id === selectedVariant.id) && (selectedVariant.newVariantQuantity > 1)) {
-        //         selectedVariant.newVariantQuantity -= 1
-        //         setInputValue(selectedVariant.newVariantQuantity)
-        //     } else {
-        //         selectedVariant.variantQuantity -= 1
-        //         setInputValue(selectedVariant.variantQuantity)
-        //     }
-        // })
-
-        // if ((cart.length === 0) && (selectedVariant.variantQuantity > 1)) {
-        //     selectedVariant.variantQuantity -= 1
-        //     setInputValue(selectedVariant.variantQuantity)
-        // }
         counter > 1 ? counter -= 1 : setCounter(1)
         setCounter(counter)
         cart.map(item => {
             if (item.id === selectedVariant.id) {
-                console.log(item.variantQuantity, selectedVariant.variantQuantity, counter, item.newVariantQuantity, selectedVariant.newVariantQuantity)
                 selectedVariant.newVariantQuantity -= 1
                 setCounter(selectedVariant.newVariantQuantity)
             } else {
@@ -136,21 +88,26 @@ export default function ProductForm({ product }) {
         if (cart.length === 0) {
             selectedVariant.variantQuantity = counter
         }
-        console.log(counter, selectedVariant.variantQuantity)
     }
 
     const handleChange = (e) => {
-        selectedVariant.variantQuantity = Number(e.target.value);
-        setInputValue(selectedVariant.variantQuantity)
+        counter = Number(e.target.value);
+        cart.map(item => {
+            if (item.id === selectedVariant.id) {
+                selectedVariant.newVariantQuantity = counter
+                setCounter(selectedVariant.newVariantQuantity)
+            } else {
+                selectedVariant.variantQuantity = counter
+                setCounter(selectedVariant.variantQuantity)
+            }
+        })
+        if (cart.length === 0) {
+            selectedVariant.variantQuantity = counter
+            setCounter(selectedVariant.variantQuantity)
+        }
         if(e.key === 0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 ){
             e.target.blur();
         }
-    }
-
-    const resetInputValue = () => {
-        const input = document.querySelector('#input').value
-        input = 1
-        setInputValue(input)
     }
 
 
@@ -190,7 +147,6 @@ export default function ProductForm({ product }) {
       onClick={() => {
           addToCart(selectedVariant)
           setCounter(1)
-          console.log(counter, selectedVariant.variantQuantity)
       }}
       className="font-semibold bg-black rounded-lg text-white px-2 py-3 mt-8 hover:bg-gray-800">Add to Cart</button>
     </div>

@@ -81,7 +81,6 @@ export default function shopProvider({ children }) {
             
             cart.map(item => {
                 if (item.id === newItem.id) {
-                    console.log('same item')
                     newCart = [...cart]
                     added = true
                 }
